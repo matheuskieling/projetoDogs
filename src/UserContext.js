@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './api';
 
 export const UserContext = React.createContext();
@@ -11,17 +11,14 @@ export const UserStorage = ({ children }) => {
   const [error, setError] = React.useState(false);
   const navigate = useNavigate();
 
-  const userLogout = React.useCallback(
-    async function userLogout() {
-      setData(null);
-      setError(null);
-      setLoading(false);
-      setLogin(false);
-      window.localStorage.removeItem('token');
-      navigate('/login');
-    },
-    [navigate],
-  );
+  const userLogout = React.useCallback(async function userLogout() {
+    setData(null);
+    setError(null);
+    setLoading(false);
+    setLogin(false);
+    window.localStorage.removeItem('token');
+    <Navigate to="/login" />;
+  }, []);
 
   async function getUser(token) {
     const { url, options } = USER_GET(token);
@@ -67,6 +64,8 @@ export const UserStorage = ({ children }) => {
         } finally {
           setLoading(false);
         }
+      } else {
+        setLogin(false);
       }
     }
     autoLogin();
