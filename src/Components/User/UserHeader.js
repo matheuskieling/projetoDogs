@@ -17,7 +17,7 @@ const UserHeader = () => {
         setTitle('Posto Sua Foto');
         break;
       case '/conta':
-        setTitle('Feed');
+        setTitle('Minha conta');
         break;
       default:
         setTitle('Minha Conta');
